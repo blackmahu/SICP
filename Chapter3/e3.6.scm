@@ -1,0 +1,28 @@
+(define (rand-update x)
+  (let ((m (expt 2 32))
+		(a 1664525)
+		(b 1013904423))
+	(remainder (+ (* a x) b) m)))
+
+(define random-init 1)
+(define rand
+  (let ((x random-init))
+	(lambda (m)
+	  (define (generate)
+		(set! x (rand-update x))
+		x)
+	  (define (reset)
+		(lambda (val)
+		  (set! x val) x))
+	  (cond ((eq? m 'generate) (generate))
+			((eq? m 'reset) (reset))
+			(else (error "incorrect method: " m))))))
+
+(newline)
+(begin (display (rand 'generate)) (newline))
+(begin (display (rand 'generate)) (newline))
+
+(newline)
+(begin (display "reset") ((rand 'reset) 1) (newline))
+(begin (display (rand 'generate)) (newline))
+(begin (display (rand 'generate)) (newline))
