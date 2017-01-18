@@ -9,7 +9,7 @@
     balance)
   (define (dispatch p m)
 	(cond ((not (eq? password p))
-		   (lambda (x) "Incorrect passowrd"))
+		   (lambda () "Incorrect passowrd"))
 		  ((eq? m 'withdraw) withdraw)
 		  ((eq? m 'deposit) deposit)
 		  (else (error "Unknown request: MAKE-ACCOUNT" m))))
