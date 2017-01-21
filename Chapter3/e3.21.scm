@@ -30,3 +30,7 @@
 		 (error "DELETE! called with an empty queue" queue))
 		(else (set-front-ptr! queue (cdr (front-ptr queue)))
 			  queue)))
+
+(define (print-queue queue)
+  (display (front-ptr queue))
+  'done)
