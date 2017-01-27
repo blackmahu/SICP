@@ -1,0 +1,23 @@
+(define (make-mutex)
+  (let ((cell (list false)))
+	(define (the-mutex m)
+	  (cond ((eq? m  'acquire)
+			 (if (test-and-set! cell)
+			   (the-mutex 'acquire)))
+			((eq? m 'release) (clear! cell))))
+	the-mutex))
+
+(define (make-semaphore n)
+  (let ((semaphore-count n))
+	(define (the-semaphore m)
+	  (cond ((eq? m 'acquire)
+			 (if (test-and-set! semaphore-count)
+			   (the-semaphore 'acquire)))
+			((eq? m 'release) (set! semaphore-count n))))
+	the-semaphore))
+
+; in term of atomic test-and-set! operations
+(define (test-and-set! sc)
+  (if (> sc 0)
+	(begin (set! sc (- sc 1)) false)
+	true))
