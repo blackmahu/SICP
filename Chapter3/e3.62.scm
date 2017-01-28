@@ -1,3 +1,5 @@
+(load "e3.61.scm")
+
 (define (div-series s1 s2)
   (if (zero? (stream-car s2))
 	(error "DIV-SERIES constant term of denominator can't be zero" (stream-car s2))
