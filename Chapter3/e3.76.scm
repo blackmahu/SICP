@@ -11,7 +11,7 @@
 
 (define (smooth input-stream)
   (scale-stream (add-stream input-stream
-							(stream-cdr stream))
+							(stream-cdr input-stream))
 				1/2))
 
 (define zero-crossings
