@@ -51,3 +51,9 @@
 	  (stream-map (lambda (x) (list (stream-car s) x))
 				  (stream-cdr t))
 	  (pairs (stream-cdr s) (stream-cdr t)))))
+
+(define (integral integrand initial-value dt)
+  (define int
+	(cons-stream initial-value
+				 (add-streams integrand dt)
+				 int)))
