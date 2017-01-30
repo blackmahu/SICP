@@ -10,8 +10,8 @@
 	  (stream-car input-stream))))
 
 (define (smooth input-stream)
-  (scale-stream (add-stream input-stream
-							(stream-cdr input-stream))
+  (scale-stream (add-streams input-stream
+							 (stream-cdr input-stream))
 				1/2))
 
 (define zero-crossings
